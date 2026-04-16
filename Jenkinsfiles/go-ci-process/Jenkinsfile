@@ -1,18 +1,22 @@
 pipeline {
     agent any
+
     tools {
-        go 'go-1.26'
+        go 'go1.26'
     }
 
     environment {
-        GO111MODULE='on'
+        GO111MODULE = 'on'
     }
-    
+
     stages {
-        stage('Test'){
-            steps{
-                git 'https://github.com/thomaspalma1/jenkins-essentials.git'
-                sh 'cd go-webapp-sample && go test ./...'
+        stage('Test') {
+            steps {
+                git url: 'https://github.com/thomaspalma1/jenkins-essentials.git', branch: 'main'
+                sh '''
+                    cd go-webapp-sample
+                    go test ./...
+                '''
             }
         }
     }
